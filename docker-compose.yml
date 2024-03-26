@@ -13,7 +13,7 @@ services:
   selenoid-ui:
     image: aerokube/selenoid-ui:latest-release
     ports:
-      - "8090:8080"
+      - "8080:8080"
     depends_on:
       - selenoid
     environment:
