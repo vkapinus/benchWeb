@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  selenoid:
+    image: aerokube/selenoid:latest-release
+    ports:
+      - "4444:4444"
+    volumes:
+      - /Users/solvd/Documents/bench/Carina-Testing/browsers.json:/etc/selenoid/browsers.json
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: ["-conf", "/etc/selenoid/browsers.json"]
+
+  selenoid-ui:
+    image: aerokube/selenoid-ui:latest-release
+    ports:
+      - "8090:8080"
+    depends_on:
+      - selenoid
+    environment:
+      SELENOID_URI: "http://selenoid:4444"
