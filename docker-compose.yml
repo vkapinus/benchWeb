@@ -1,20 +1,82 @@
 version: '3'
-
 services:
-  selenoid:
-    image: aerokube/selenoid:latest-release
-    ports:
-      - "4444:4444"
-    volumes:
-      - /Users/solvd/Documents/bench/Carina-Testing/browsers.json:/etc/selenoid/browsers.json
-      - /var/run/docker.sock:/var/run/docker.sock
-    command: ["-conf", "/etc/selenoid/browsers.json"]
-
   selenoid-ui:
-    image: aerokube/selenoid-ui:latest-release
+    network_mode: bridge
+    image: aerokube/selenoid-ui
     ports:
-      - "8080:8080"
-    depends_on:
+      - 8080:8080
+    command: ["--selenoid-uri", "http://selenoid:4444"]
+    links:
+      - ggr-ui
       - selenoid
+
+  ggr-ui:
+    network_mode: bridge
+    restart: always
+    image: aerokube/ggr-ui:latest-release
+    ports:
+      - 8888:8888
+    volumes:
+      - /Users/solvd/Documents/bench/bench_web/config:/etc/grid-router:ro
+
+  ggr:
+    network_mode: bridge
+    image: aerokube/ggr:latest-release
+    ports:
+      - 4446:4446
+    restart: always
+    volumes:
+      - /Users/solvd/Documents/bench/bench_web/config:/etc/grid-router:ro
+    command: [ "-listen", ":4446"]
+
+  selenoid:
+    network_mode: bridge
+    image: aerokube/selenoid
+    volumes:
+      - "/Users/solvd/Documents/bench/bench_web/config:/etc/selenoid"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/Users/solvd/Documents/bench/bench_web/config:/opt/selenoid/video"
+      - "/Users/solvd/Documents/bench/bench_web/config:/opt/selenoid/logs"
+    ports:
+      - 4444:4444
     environment:
-      SELENOID_URI: "http://selenoid:4444"
+      - OVERRIDE_VIDEO_OUTPUT_DIR=/Users/solvd/Documents/bench/bench_web/config/video
+    command: [ "-conf", "/etc/selenoid/browsers.json", "-video-output-dir", "/opt/selenoid/video", "-log-output-dir", "/opt/selenoid/log"]
+
+
+#
+#version: '3'
+#services:
+#  selenoid:
+#    image: aerokube/selenoid
+#    ports:
+#      - "4444:4444"
+#    volumes:
+#      - /Users/solvd/Documents/bench/bench_web/config:/etc/selenoid
+#      - /Users/solvd/Documents/bench/bench_web/config/browsers.json:/etc/selenoid/browsers.json
+#      - /var/run/docker.sock:/var/run/docker.sock
+#
+#  selenoid-ui:
+#    image: aerokube/selenoid-ui
+#    ports:
+#      - "8080:8080"
+#    command: [ "--selenoid-uri", "http://selenoid:4444" ]
+#
+#  ggr:
+#    image: aerokube/ggr
+#    ports:
+#      - "4446:4446"
+#    volumes:
+#      - /Users/solvd/Documents/bench/bench_web/config:/etc/grid-router:ro
+#    links:
+#      - selenoid
+#
+#  ggr-ui:
+#    image: aerokube/ggr-ui:latest-release
+#    ports:
+#      - "8888:8888"
+#    volumes:
+#     - /Users/solvd/Documents/bench/bench_web/config:/etc/grid-router:ro
+#
+#
+

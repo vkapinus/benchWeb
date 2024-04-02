@@ -21,5 +21,25 @@
         </classes>
     </test>
 
+    <test name="vekTest">
+        <classes>
+            <class name="HomePageTest">
+                <methods>
+                    <include name="addProductToCartTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="vekTest">
+        <classes>
+            <class name="HomePageTest">
+                <methods>
+                    <include name="openCartTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
 </suite>
 
