@@ -46,6 +46,7 @@ public class HomePageTest extends AbstractTest {
     @Test
     public void loginSauceDemoTest() {
         LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.open();
         loginPage.assertPageOpened();
         loginPage.login("standard_user", "secret_sauce");
     }
