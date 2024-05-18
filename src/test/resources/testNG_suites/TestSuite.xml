@@ -11,7 +11,7 @@
     <parameter name="jenkinsRegressionMatrix_full_regression" value="browser: chrome; browser: firefox"/>
 
 
-    <test name="vekTest">
+    <test name="vekTest1">
         <classes>
             <class name="HomePageTest">
                 <methods>
@@ -21,7 +21,7 @@
         </classes>
     </test>
 
-    <test name="vekTest">
+    <test name="vekTest2">
         <classes>
             <class name="HomePageTest">
                 <methods>
@@ -31,7 +31,7 @@
         </classes>
     </test>
 
-    <test name="vekTest">
+    <test name="vekTest3">
         <classes>
             <class name="HomePageTest">
                 <methods>
