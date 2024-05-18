@@ -11,35 +11,35 @@
     <parameter name="jenkinsRegressionMatrix_full_regression" value="browser: chrome; browser: firefox"/>
 
 
-    <test name="vekTest1">
+    <test name="sauceDemoTest">
         <classes>
             <class name="HomePageTest">
                 <methods>
-                    <include name="homePageTest"/>
+                    <include name="loginSauceDemoTest"/>
                 </methods>
             </class>
         </classes>
     </test>
 
-    <test name="vekTest2">
-        <classes>
-            <class name="HomePageTest">
-                <methods>
-                    <include name="addProductToCartTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="vekTest2">-->
+<!--        <classes>-->
+<!--            <class name="HomePageTest">-->
+<!--                <methods>-->
+<!--                    <include name="addProductToCartTest"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
-    <test name="vekTest3">
-        <classes>
-            <class name="HomePageTest">
-                <methods>
-                    <include name="openCartTest"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
+<!--    <test name="vekTest3">-->
+<!--        <classes>-->
+<!--            <class name="HomePageTest">-->
+<!--                <methods>-->
+<!--                    <include name="openCartTest"/>-->
+<!--                </methods>-->
+<!--            </class>-->
+<!--        </classes>-->
+<!--    </test>-->
 
 </suite>
 

@@ -3,6 +3,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.CartPage;
 import pages.HomePage;
+import pages.LoginPage;
 import pages.SearchResultPage;
 
 public class HomePageTest extends AbstractTest {
@@ -40,5 +41,12 @@ public class HomePageTest extends AbstractTest {
         homePage.assertPageOpened();
         CartPage cartPage = homePage.openCart();
         Assert.assertTrue(cartPage.isEmptyCartMessagePresent(), "'Cart is empty' message is not present");
+    }
+
+    @Test
+    public void loginSauceDemoTest() {
+        LoginPage loginPage = new LoginPage(getDriver());
+        loginPage.assertPageOpened();
+        loginPage.login("standard_user", "secret_sauce");
     }
 }
